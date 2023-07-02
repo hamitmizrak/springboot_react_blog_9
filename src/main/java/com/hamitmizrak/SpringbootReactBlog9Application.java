@@ -29,25 +29,25 @@ import java.util.TimeZone;
 
 // Spring Security
 @SpringBootApplication(exclude = {
-		//SecurityAutoConfiguration.class,
-		org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
-		org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class
+        //SecurityAutoConfiguration.class,
+        org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
+        org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class
 }
 )
 /*@SpringBootApplication*/
 public class SpringbootReactBlog9Application {
 
-	@PostConstruct
-	public void init() {
-		TimeZone.setDefault(TimeZone.getTimeZone("IST"));
-	}
+    @PostConstruct
+    public void init() {
+        TimeZone.setDefault(TimeZone.getTimeZone("IST"));
+    }
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		// devtools active isActive
-		//System.setProperty("spring.devtools.restart.enabled","true");
+        // devtools active isActive
+        //System.setProperty("spring.devtools.restart.enabled","true");
 
-		// PORT Ayarlamak
+        // PORT Ayarlamak
         /*
         SpringApplication app = new SpringApplication(TurgutUniversitySpringAllInOneApplication.class);
         app.setDefaultProperties(Collections
@@ -55,10 +55,10 @@ public class SpringbootReactBlog9Application {
         app.run(args);
          */
 
-		//Disables headless JOptionPane
-		System.setProperty("java.awt.headless", "false");
+        //Disables headless JOptionPane
+        System.setProperty("java.awt.headless", "false");
 
-		SpringApplication.run(SpringbootReactBlog9Application.class, args);
-	}
+        SpringApplication.run(SpringbootReactBlog9Application.class, args);
+    }
 
 }
