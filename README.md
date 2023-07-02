@@ -36,11 +36,11 @@ IRegisterRepository
 
 
 ---
-#  Java Full Stack Developer -7 (1 Nisan  2023)
-* [GitHub](https://github.com/hamitmizrak/Turgut_Ozal_University_JavaTutorialsCommonData)
+#  Java Full Stack Developer -7 (2 June  2023)
+* [GitHub](https://github.com/hamitmizrak/springboot_react_blog_9)
 *
 ### Gereksinimler
-Java 19
+Java 20
 intellij idea Ultimate
 Visual Studio Code
 Node js
