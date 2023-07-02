@@ -1,12 +1,22 @@
 package com.hamitmizrak.data.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
 
+//LOMBOK
+@Getter
+@Setter
+
+@Entity
+@Table(name = "blog")
 public class BlogEntity extends BaseEntity implements Serializable {
 
     // Serileştirme
