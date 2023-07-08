@@ -25,16 +25,16 @@ public class BlogEntity extends BaseEntity implements Serializable {
     // Validation
 
     // HEADER
-    @Column(name = "header", columnDefinition = "varchar(255) default 'header girmediniz")
+    @Column(name = "headers", columnDefinition = "varchar(255) default 'header girmediniz' ")
     private String header;
 
     // CONTENT
-    @Column(name = "header", columnDefinition = "varchar(255) default 'content girmediniz")
+    @Column(name = "content", columnDefinition = "varchar(255) default 'content girmediniz' ")
     private String content;
 
     // IMAGE
     @Lob
-    @Column(columnDefinition = "varchar(255) default 'picture.png")
+    @Column(columnDefinition = "varchar(255) default 'picture.png' ")
     private String image;
 
     // DATE

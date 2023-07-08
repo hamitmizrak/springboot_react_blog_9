@@ -1,0 +1,90 @@
+#########################################
+### SPEED DATA ##########################
+--- URL ---
+http://localhost:2222/blog/api/v1/speed/5
+
+--- cUrl ---
+curl -X 'GET' \
+  'http://localhost:2222/blog/api/v1/speed/5' \
+  -H 'accept: */*'
+
+#########################################
+### LİSt ################################
+--- URL ---
+http://localhost:2222/blog/api/v1/list
+
+--- cUrl ---
+curl -X 'GET' \
+'http://localhost:2222/blog/api/v1/list' \
+-H 'accept: */*'
+
+#########################################
+### FIND ID #############################
+--- URL ---
+http://localhost:2222/blog/api/v1/find/1
+
+--- cUrl ---
+curl -X 'GET' \
+'http://localhost:2222/blog/api/v1/find/1' \
+-H 'accept: */*'
+
+#########################################
+### CREATE#############################
+--- URL ---
+http://localhost:2222/blog/api/v1/create
+
+-- POSTMAN ---
+http://localhost:2222/blog/api/v1/create
+{
+    "header": "headerheaderheaderheaderheaderheader",
+    "content": "contentcontentcontentcontentcontentcontent",
+    "image": "imageimageimageimage"
+}
+
+--- cUrl ---
+curl -X 'POST' \
+  'http://localhost:2222/blog/api/v1/create' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "header": "headerheaderheaderheaderheaderheader",
+  "content": "contentcontentcontentcontentcontentcontent",
+  "image": "imageimageimageimage"
+}'
+
+#########################################
+### UPDATE #############################
+--- URL ---
+http://localhost:2222/blog/api/v1/update/1
+
+--- cUrl ---
+curl -X 'PUT' \
+  'http://localhost:2222/blog/api/v1/update/1' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "systemDate": "2023-07-08T07:26:42.576Z",
+  "header": "header1header1header1header1header1header1",
+  "content": "content1content1content1content1content1content1",
+  "image": "image1image1image1image1image1image1image1"
+}'
+
+
+#########################################
+### DELETE #############################
+--- URL ---
+http://localhost:2222/blog/api/v1/delete/1
+
+--- cUrl ---
+curl -X 'DELETE' \
+  'http://localhost:2222/blog/api/v1/delete/1' \
+  -H 'accept: */*'
+
+#########################################
+### DELETE #############################
+http://localhost:2222/blog/api/v1/delete/all
+
+--- cUrl ---
+curl -X 'DELETE' \
+  'http://localhost:2222/blog/api/v1/delete/all' \
+  -H 'accept: */*'

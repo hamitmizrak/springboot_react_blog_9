@@ -160,13 +160,13 @@
 		</dependency>
 
 		<!--devtools:otomatik compiler icin-->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 			<scope>runtime</scope>
 		</dependency>
-
+-->
 		<!--application.properties ==> application.yml-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

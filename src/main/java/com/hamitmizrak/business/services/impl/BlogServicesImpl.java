@@ -11,10 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 // LOMBOK
 @RequiredArgsConstructor
@@ -31,12 +28,37 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
     // MODEL MAPPER
     @Override
     public BlogDto EntityToDto(BlogEntity blogEntity) {
-        return modelMapperBean.modelMapperMethod().map(blogEntity,BlogDto.class);
+        return modelMapperBean.modelMapperMethod().map(blogEntity, BlogDto.class);
     }
 
     @Override
     public BlogEntity DtoToEntity(BlogDto blogDto) {
-        return modelMapperBean.modelMapperMethod().map(blogDto,BlogEntity.class);
+        return modelMapperBean.modelMapperMethod().map(blogDto, BlogEntity.class);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // ALL CREATE
+    @Override
+    public List<BlogDto> speedData(Long data) {
+        BlogDto blogDto;
+        List<BlogDto> list = new ArrayList<>();
+        for (int i = 1; i <= data; i++) {
+            blogDto = BlogDto.builder()
+                    .header("header " + UUID.randomUUID().toString())
+                    .content("content " + UUID.randomUUID().toString())
+                    .build();
+            list.add(blogDto);
+            BlogEntity entity = iBlogRepository.save(DtoToEntity(blogDto));
+            blogDto.setId(entity.getId());
+        }
+        return list;
+    }
+
+    // ALL DELETE
+    @Override
+    public String allDelete() {
+        iBlogRepository.deleteAll();
+        return "Bütün veriler Silindi";
     }
 
     //////////////////////////////////////////////////////////////////////////////
@@ -44,11 +66,11 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
     @Override
     @Transactional // Create, Delete, Update
     public BlogDto blogServiceCreate(BlogDto blogDto) {
-        if(blogDto!=null){
-           BlogEntity blogEntity= iBlogRepository.save(DtoToEntity(blogDto));
-           blogDto.setId(blogEntity.getId());
-           blogDto.setSystemDate(blogEntity.getSystemDate());
-        }else if(blogDto==null)
+        if (blogDto != null) {
+            BlogEntity blogEntity = iBlogRepository.save(DtoToEntity(blogDto));
+            blogDto.setId(blogEntity.getId());
+            blogDto.setSystemDate(blogEntity.getSystemDate());
+        } else if (blogDto == null)
             throw new NullPointerException("Blog Dto Null");
         return blogDto;
     }
@@ -56,26 +78,26 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
     // LIST
     @Override
     public List<BlogDto> blogServiceList() {
-      Iterable<BlogEntity> blogEntitiesList= iBlogRepository.findAll();
-        List<BlogDto> blogDtoList=null;
-      if(blogEntitiesList!=null){
-         blogDtoList=new ArrayList<>();
-          for (BlogEntity entity:blogEntitiesList ) {
-             BlogDto blogDto=EntityToDto(entity);
-             blogDtoList.add(blogDto);
-          }
-      }else if(blogEntitiesList==null)
-          throw new NullPointerException("Blog Dto Null");
+        Iterable<BlogEntity> blogEntitiesList = iBlogRepository.findAll();
+        List<BlogDto> blogDtoList = null;
+        if (blogEntitiesList != null) {
+            blogDtoList = new ArrayList<>();
+            for (BlogEntity entity : blogEntitiesList) {
+                BlogDto blogDto = EntityToDto(entity);
+                blogDtoList.add(blogDto);
+            }
+        } else if (blogEntitiesList == null)
+            throw new NullPointerException("Blog Dto Null");
         return blogDtoList;
     }
 
     // FIND BY ID
     @Override
     public BlogDto blogServiceFindById(Long id) {
-        BlogEntity blogEntity=null;
-        if(id!=null){
-            blogEntity=iBlogRepository.findById(id).orElseThrow(()->new ResourceNotFoundException(id+" Nolu Id yoktur"));
-        }else if(id==null)
+        BlogEntity blogEntity = null;
+        if (id != null) {
+            blogEntity = iBlogRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " Nolu Id yoktur"));
+        } else if (id == null)
             throw new NullPointerException("Blog Dto Null");
         return EntityToDto(blogEntity);
     }
@@ -85,15 +107,15 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
     @Transactional // Create, Delete, Update
     public Map<String, Boolean> blogServiceDeleteId(Long id) {
         // Find
-       BlogDto blogDtoFind= blogServiceFindById(id);
-       // Map
-        Map<String,Boolean> mapDelete=new HashMap<>();
-       if(blogDtoFind!=null){
-           BlogEntity entity=DtoToEntity(blogDtoFind);
-           iBlogRepository.delete(entity);
-           mapDelete.put(entity+" Silindi",Boolean.TRUE);
-       }else if(id==null)
-           throw new NullPointerException("Blog Dto Null");
+        BlogDto blogDtoFind = blogServiceFindById(id);
+        // Map
+        Map<String, Boolean> mapDelete = new HashMap<>();
+        if (blogDtoFind != null) {
+            BlogEntity entity = DtoToEntity(blogDtoFind);
+            iBlogRepository.delete(entity);
+            mapDelete.put(entity + " Silindi", Boolean.TRUE);
+        } else if (id == null)
+            throw new NullPointerException("Blog Dto Null");
         return mapDelete;
     }
 
@@ -102,9 +124,9 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
     @Transactional // Create, Delete, Update
     public BlogDto blogServiceUpdateId(Long id, BlogDto blogDto) {
         // Find
-        BlogDto blogDtoFind= blogServiceFindById(id);
-        if(blogDto!=null){
-            BlogEntity blogEntity=DtoToEntity(blogDtoFind);
+        BlogDto blogDtoFind = blogServiceFindById(id);
+        if (blogDto != null) {
+            BlogEntity blogEntity = DtoToEntity(blogDtoFind);
             blogEntity.setHeader(blogDto.getHeader());
             blogEntity.setContent(blogDto.getContent());
             blogEntity.setImage(blogDto.getImage());
@@ -112,7 +134,7 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
             // Dönüşte ID, DATE
             blogDto.setId(blogEntity.getId());
             blogDto.setSystemDate(blogEntity.getSystemDate());
-        }else if(id==null)
+        } else if (id == null)
             throw new NullPointerException("Blog Dto Null");
         return blogDto;
     }
