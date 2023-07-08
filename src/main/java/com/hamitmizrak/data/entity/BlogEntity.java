@@ -38,6 +38,6 @@ public class BlogEntity extends BaseEntity implements Serializable {
     private String image;
 
     // DATE
-    @Builder.Default
-    private Date systemDate = new Date(System.currentTimeMillis());
+    //@Builder.Default
+    private Date systemDate; // = new Date(System.currentTimeMillis());
 } //end class

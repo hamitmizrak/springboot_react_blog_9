@@ -1,0 +1,5 @@
+for Maven
+./mvnw clean package -DskipTests
+docker-compose up
+docker-compose up -d
+docker-compose down
