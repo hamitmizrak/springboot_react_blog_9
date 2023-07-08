@@ -1,3 +1,13 @@
 npx create-react-app blog 
 npm start
 ------------------------------------
+babel 
+webpack
+compiler
+
+------------------------------------
+install 
+npm install axios@1.4.0 --save
+npm install react-router-dom@5.2.0 --save
+npm install i18next@21.9.1 --save
+npm install react-i18next@11.18.6 --save
