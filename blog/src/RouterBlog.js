@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom/cjs/react-router-dom';
+import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom/cjs/react-router-dom';
 
 // browserRouter, HashRouter
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom/cjs/react-router-dom.min';
 
 // Context
-import { LoginAuthenticationContext } from './context/LoginContext';
+import {LoginAuthenticationContext} from './context/LoginContext';
 
 // Dil için
 import {withTranslation} from 'react-i18next'
@@ -26,47 +26,51 @@ import BlogView from './component/blog/BlogView';
 // CLASS
 class RouterBlog extends Component {
 
-  static displayName = "Router Blog";
+    static displayName = "Router_Blog";
 
-constructor(props){
-  super(props);
+    constructor(props) {
+        super(props);
 
-  // STATE
-  this.state={}
+        // STATE
+        this.state = {}
 
-  // BIND
-} //end constructor
+        // BIND
+    } //end constructor
 
 // CONTEXT
-static contextType=LoginAuthenticationContext;
+    static contextType = LoginAuthenticationContext;
 
 // RENDER
-  render() {
+    render() {
 
-    // RETURN
-    return (
-      <React.Fragment>
-        <Router>
-          <Header logo=""/>
+        const {isLoginState, username} = this.state;
+        //const isLoginState=this.context.state.isLoginState
+        // const username=this.context.state.username;
 
-          <Main className="container">
-            <Switch>
-              <Route path="/" exact component={BlogList}></Route>
-              <Route path="/blog" component={BlogList}></Route>
+        // RETURN
+        return (
+            <React.Fragment>
+                <Router>
+                    <Header logo=""/>
 
-              <Route path="/blog/list" component={BlogList}></Route>
-              <Route path="/blog/create" component={BlogCreate}></Route>
-              <Route path="/blog/update/:id" component={BlogUpdate}></Route>
-              <Route path="/blog/view/:id" component={BlogView}></Route>
-              <Redirect to="/" />
-            </Switch>
-          </Main>
+                    <div className="container">
+                        <Switch>
+                            <Route path="/" exact component={BlogList}></Route>
+                            <Route path="/blog" component={BlogList}></Route>
 
-          <Footer copy="@Copy; Bütün Haklar Saklıdır"/>
-        </Router>
-      </React.Fragment>
-    )
-  }
+                            <Route path="/blog/list" component={BlogList}></Route>
+                            <Route path="/blog/create" component={BlogCreate}></Route>
+                            <Route path="/blog/update/:id" component={BlogUpdate}></Route>
+                            <Route path="/blog/view/:id" component={BlogView}></Route>
+                            <Redirect to="/"/>
+                        </Switch>
+                    </div>
+
+                    <Footer copy="@Copy; Bütün Haklar Saklıdır"/>
+                </Router>
+            </React.Fragment>
+        )
+    }
 } //end class
 
 // Higher Order Component

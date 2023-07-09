@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 export const LoginAuthenticationContext = React.createContext();
 
 // Class
-export default class LoginContext extends Component {
+class LoginContext extends Component {
 
     //Component'te  görünür isim
     static displayName = "Login_Context";
@@ -62,3 +62,5 @@ export default class LoginContext extends Component {
         ) //end return
     } // end render
 } //end class
+
+export default  LoginContext
