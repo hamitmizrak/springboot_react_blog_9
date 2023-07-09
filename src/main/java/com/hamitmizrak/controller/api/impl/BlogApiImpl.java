@@ -1,7 +1,8 @@
-package com.hamitmizrak.controller.api;
+package com.hamitmizrak.controller.api.impl;
 
 import com.hamitmizrak.business.dto.BlogDto;
 import com.hamitmizrak.business.services.impl.BlogServicesImpl;
+import com.hamitmizrak.controller.api.IBlogApi;
 import com.hamitmizrak.error.ApiResult;
 import com.hamitmizrak.exception.ResourceBadRequestException;
 import com.hamitmizrak.exception.ResourceNotFoundException;
@@ -25,7 +26,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/blog/api/v1/")
 @CrossOrigin(origins = FrontendURL.FRONTEND_URL)
-public class BlogApiImpl implements IBlogApi<BlogDto>{
+public class BlogApiImpl implements IBlogApi<BlogDto> {
 
     // INJECTION
     private final BlogServicesImpl blogServices;
