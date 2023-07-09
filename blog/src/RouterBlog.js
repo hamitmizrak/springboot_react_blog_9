@@ -1,21 +1,53 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom';
+
+// browserRouter, HashRouter
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
+
+// Context
+import { LoginAuthenticationContext } from './context/LoginContext';
+
+// Dil için
+import {withTranslation} from 'react-i18next'
+import './internationalization/i18nlanguage'
+
+// header, main, footer
 import Footer from './component/Footer';
 import Header from './component/Header';
 import Main from './component/Main';
 import './RouterBlog.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
+
+// Blog
 import BlogList from './component/blog/BlogList';
 import BlogCreate from './component/blog/BlogCreate';
 import BlogUpdate from './component/blog/BlogUpdate';
 import BlogView from './component/blog/BlogView';
-import { Redirect } from 'react-router-dom/cjs/react-router-dom';
 
-export default class RouterBlog extends Component {
+// CLASS
+class RouterBlog extends Component {
+
+  static displayName = "Router Blog";
+
+constructor(props){
+  super(props);
+
+  // STATE
+  this.state={}
+
+  // BIND
+} //end constructor
+
+// CONTEXT
+static contextType=LoginAuthenticationContext;
+
+// RENDER
   render() {
+
+    // RETURN
     return (
       <React.Fragment>
         <Router>
-          <Header />
+          <Header logo=""/>
 
           <Main className="container">
             <Switch>
@@ -30,10 +62,13 @@ export default class RouterBlog extends Component {
             </Switch>
           </Main>
 
-          <Footer />
+          <Footer copy="@Copy; Bütün Haklar Saklıdır"/>
         </Router>
       </React.Fragment>
     )
   }
-}
+} //end class
+
+// Higher Order Component
+export default withTranslation()(RouterBlog);
 
