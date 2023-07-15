@@ -24,7 +24,7 @@ import java.util.Map;
 
 // API
 @RestController
-@RequestMapping("/blog/api/v1/")
+@RequestMapping("/blog/api/v1")
 @CrossOrigin(origins = FrontendURL.FRONTEND_URL)
 public class BlogApiImpl implements IBlogApi<BlogDto> {
 
@@ -36,7 +36,7 @@ public class BlogApiImpl implements IBlogApi<BlogDto> {
 
     /////////////////////////////////////////////////////////////////////
     // ALL CREATE
-    // http://localhost:2222/blog/api/v1/speed/10
+    // http://localhost:4444/blog/api/v1/speed/10
     @Override
     @GetMapping("/speed/{data}")
     public ResponseEntity<List<BlogDto>> speedData(@PathVariable(name = "data") Long data) {
@@ -44,7 +44,7 @@ public class BlogApiImpl implements IBlogApi<BlogDto> {
     }
 
     // ALL DELETE
-    // http://localhost:2222/blog/api/v1/delete/all
+    // http://localhost:4444/blog/api/v1/delete/all
     @Override
     @DeleteMapping("/delete/all")
     public ResponseEntity<String> allDelete() {
@@ -53,7 +53,7 @@ public class BlogApiImpl implements IBlogApi<BlogDto> {
 
     /////////////////////////////////////////////////////////////////////
     // CREATE
-    // http://localhost:2222/blog/api/v1/create
+    // http://localhost:4444/blog/api/v1/create
     @Override
     @PostMapping("/create")
     public ResponseEntity<?> blogServiceCreate(@Valid @RequestBody BlogDto blogDto) {
@@ -64,7 +64,7 @@ public class BlogApiImpl implements IBlogApi<BlogDto> {
     }
 
     // LIST
-    // http://localhost:2222/blog/api/v1/list
+    // http://localhost:4444/blog/api/v1/list
     @Override
     @GetMapping("/list")
     public ResponseEntity<List<BlogDto>> blogServiceList() {
@@ -72,9 +72,9 @@ public class BlogApiImpl implements IBlogApi<BlogDto> {
     }
 
     // FIND BY ID
-    // http://localhost:2222/blog/api/v1/find
-    // http://localhost:2222/blog/api/v1/find/0
-    // http://localhost:2222/blog/api/v1/find/1
+    // http://localhost:4444/blog/api/v1/find
+    // http://localhost:4444/blog/api/v1/find/0
+    // http://localhost:4444/blog/api/v1/find/1
     @Override
     @GetMapping("/find/{id}")
     public ResponseEntity<BlogDto> blogServiceFindById(@PathVariable(name = "id") Long id) {

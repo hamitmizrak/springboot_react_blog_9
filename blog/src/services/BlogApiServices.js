@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Sabit URL
-const BLOG_URL = "blog/api/v1";
+const BLOG_URL = "/blog/api/v1";
 
 class BlogApiServices {
 
