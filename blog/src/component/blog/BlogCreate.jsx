@@ -13,6 +13,7 @@ class BlogCreate extends Component {
       blogDto: {},
       header: null,
       content: null,
+      isRead:false,
     };
     //BIND
     this.onchangeInputValue = this.onchangeInputValue.bind(this);
@@ -23,7 +24,7 @@ class BlogCreate extends Component {
 
   // FUNCTION
 
-  // ONCHANGE
+  // ONCHANGE INPUT
   onchangeInputValue = (event) => {
     console.log(event);
 
@@ -40,6 +41,15 @@ class BlogCreate extends Component {
     this.setState({
       [name]: value,
     })
+  }
+
+    // ONCHANGE CHECKBOX
+  onchangeCheckBoxValue = (event) => {
+console.log(event.target.checked);
+
+this.setState({
+  isRead:event.target.checked
+})
   }
 
   // SUBMIT
@@ -119,7 +129,8 @@ class BlogCreate extends Component {
                 type="checkbox"
                 className="form-check-input"
                 id="isRead"
-                checked44=""
+                name="isRead"
+                onChange={this.onchangeCheckBoxValue}
               />
               <label className="form-check-label ms-2" htmlFor="isRead">
                 blog Yüklensin mi ?
@@ -139,6 +150,11 @@ class BlogCreate extends Component {
 
 // i18n export default Wrapper
 export default withTranslation()(BlogCreate);
+
+// Kontrol
+// resuability
+// multiple request 
+// Update
 
 
 
