@@ -57,6 +57,7 @@ class RouterBlog extends Component {
                         <Switch>
                             <Route path="/" exact component={BlogList}></Route>
                             <Route path="/blog" component={BlogList}></Route>
+
                             <Route path="/blog/list" component={BlogList}></Route>
                             <Route path="/blog/create" component={BlogCreate}></Route>
                             <Route path="/blog/update/:id" component={BlogUpdate}></Route>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import { withTranslation } from 'react-i18next';
 
-export default class BlogCreate extends Component {
+class BlogCreate extends Component {
   static displayName = "Blog_Create";
 
   // CONSTRUCTOR
@@ -54,14 +55,14 @@ export default class BlogCreate extends Component {
             {/* Header */}
             <div className="form-outline mb-4">
               <label className="form-label" htmlFor="header">
-                Header
+                {this.props.t('blog_header')}
               </label>
               <input
                 type="text"
                 className="form-control"
                 id="header"
                 name="header"
-                placeholder="Blog için header giriniz ..."
+                placeholder={this.props.t('blog_header')}
                 autofocus={true}
                 required={true}
                 onChange={this.onchangeInputValue}
@@ -70,14 +71,14 @@ export default class BlogCreate extends Component {
             </div>
             {/* Content */}
             <div className="form-outline mb-4">
-              <label className="form-label" htmlFor="header">
-                Content
+              <label className="form-label" htmlFor="content">
+              {this.props.t('blog_content')}
               </label>
               <textarea
                 className="form-control"
-                id="header"
-                name="header"
-                placeholder="Blog için content giriniz ..."
+                id="content"
+                name="content"
+                placeholder={this.props.t('blog_content')}
                 autofocus={false}
                 required={true}
                 defaultValue={"        "}
@@ -97,15 +98,17 @@ export default class BlogCreate extends Component {
                 blog Yüklensin mi ?
               </label>
             </div>
-            <button className="btn btn-primary">Gönder</button>
+            <button className="btn btn-primary">{this.props.t('submit')}</button>
           </form>
         </div>
-
       </React.Fragment>
     )
   } // end render
 } // end class
 
+
+// i18n export default Wrapper
+export default withTranslation()(BlogCreate);
 
 
 
