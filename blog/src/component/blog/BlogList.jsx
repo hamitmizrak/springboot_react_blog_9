@@ -15,7 +15,6 @@ export default class BlogList extends Component {
         this.view=this.view.bind(this);
         this.update=this.update.bind(this);
         this.delete=this.delete.bind(this);
-
     }
 
     // CDM
