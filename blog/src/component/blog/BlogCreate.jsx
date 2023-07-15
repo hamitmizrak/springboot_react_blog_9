@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withTranslation } from 'react-i18next';
+import BlogApiServices from '../../services/BlogApiServices';
 
 class BlogCreate extends Component {
   static displayName = "Blog_Create";
@@ -12,14 +13,17 @@ class BlogCreate extends Component {
       blogDto: {},
       header: null,
       content: null,
-
     };
     //BIND
+    this.onchangeInputValue = this.onchangeInputValue.bind(this);
+    this.blogCreateSubmit = this.blogCreateSubmit.bind(this);
   }
 
   // CDM
 
   // FUNCTION
+
+  // ONCHANGE
   onchangeInputValue = (event) => {
     console.log(event);
 
@@ -36,6 +40,29 @@ class BlogCreate extends Component {
     this.setState({
       [name]: value,
     })
+  }
+
+  // SUBMIT
+  blogCreateSubmit = async (event) => {
+    // Browser sen dur ben gönderirim.
+    event.preventDefault();
+    const { header, content } = this.state;
+    const blogDto = {
+      //header:header,
+      //content:content,
+      header, content
+    }
+
+    // BlogApiServices.blogServiceCreate(blogDto).then().catch();
+    try {
+      const response = await BlogApiServices.blogServiceCreate(blogDto);
+      if (response == 200) {
+        // PHP
+        this.props.history.push("/blog/list")
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   // RENDER
@@ -67,12 +94,12 @@ class BlogCreate extends Component {
                 required={true}
                 onChange={this.onchangeInputValue}
               />
-              <div className="text-danger is-invalid">Header boş geçtiniz</div>
+              <div className="text-danger is-invalid">{this.props.t('is_valid_header')}</div>
             </div>
             {/* Content */}
             <div className="form-outline mb-4">
               <label className="form-label" htmlFor="content">
-              {this.props.t('blog_content')}
+                {this.props.t('blog_content')}
               </label>
               <textarea
                 className="form-control"
@@ -84,7 +111,7 @@ class BlogCreate extends Component {
                 defaultValue={"        "}
                 onChange={this.onchangeInputValue}
               />
-              <div className="text-danger is-invalid">Content boş geçtiniz</div>
+              <div className="text-danger is-invalid">{this.props.t('is_valid_content')}</div>
             </div>
             {/* is read */}
             <div className="form-check d-flex justify-content-center">
@@ -98,7 +125,10 @@ class BlogCreate extends Component {
                 blog Yüklensin mi ?
               </label>
             </div>
-            <button className="btn btn-primary">{this.props.t('submit')}</button>
+            <button
+              type='submit'
+              onClick={this.blogCreateSubmit}
+              className="btn btn-primary">{this.props.t('submit')}</button>
           </form>
         </div>
       </React.Fragment>

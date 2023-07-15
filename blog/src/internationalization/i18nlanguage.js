@@ -35,6 +35,8 @@ i18n.use(initReactI18next).init({
                     'blog_header':'Blog Header',
                     'blog_content':'Blog Content',
                     'blog_image':'Blog Image',
+                    'is_valid_header':'You have to header write',
+                    'is_valid_content':'You have to header write',
                 }
             },
         tr:
@@ -69,6 +71,8 @@ i18n.use(initReactI18next).init({
                     'blog_header':'Blog Başlık',
                     'blog_content':'Blog İçerik',
                     'blog_image':'Blog Resim',
+                    'is_valid_header':'Blog içinde başlık yazmalısınız',
+                    'is_valid_content':'Blog içinde içerik yazmalısınız',
                 }
             }
     },
