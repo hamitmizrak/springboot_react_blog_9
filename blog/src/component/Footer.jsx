@@ -9,7 +9,7 @@ export default class Footer extends Component {
     render() {
         return (
             <div>
-                <footer>
+                <footer className="fixed-bottom">
                     <div
                         className="text-center p-4"
                         style={{

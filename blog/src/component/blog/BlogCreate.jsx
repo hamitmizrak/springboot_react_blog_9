@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import { withTranslation } from 'react-i18next';
 import BlogApiServices from '../../services/BlogApiServices';
+import ResuabilityBlogInput from './ResuabilityBlogInput';
 
 class BlogCreate extends Component {
+
+  //DisplayName
   static displayName = "Blog_Create";
 
   // CONSTRUCTOR
@@ -13,11 +16,13 @@ class BlogCreate extends Component {
       blogDto: {},
       header: null,
       content: null,
-      isRead:false,
+      isRead: false,
+      spinnerData: false,
+      validationErrors: {}
     };
     //BIND
     this.onchangeInputValue = this.onchangeInputValue.bind(this);
-    this.blogCreateSubmit = this.blogCreateSubmit.bind(this);
+    this.blogSubmit = this.blogSubmit.bind(this);
   }
 
   // CDM
@@ -35,25 +40,30 @@ class BlogCreate extends Component {
 
     // 2. YOL
     const { name, value } = event.target
-    console.log(`NAME: ${name} VALUE: ${value}`);
+    //console.log(`NAME: ${name} VALUE: ${value}`);
+
+    // Backend Error
+    const backendErrorHandle = { ...this.state.validationErrors }
+    //console.log(backendErrorHandle);
+    backendErrorHandle[name] = undefined;
 
     // STATE
     this.setState({
       [name]: value,
+      backendErrorHandle
     })
   }
 
-    // ONCHANGE CHECKBOX
+  // ONCHANGE CHECKBOX
   onchangeCheckBoxValue = (event) => {
-console.log(event.target.checked);
-
-this.setState({
-  isRead:event.target.checked
-})
+    console.log(event.target.checked);
+    this.setState({
+      isRead: event.target.checked
+    })
   }
 
   // SUBMIT
-  blogCreateSubmit = async (event) => {
+  blogSubmit = async (event) => {
     // Browser sen dur ben gönderirim.
     event.preventDefault();
     const { header, content } = this.state;
@@ -62,21 +72,41 @@ this.setState({
       //content:content,
       header, content
     }
+    console.log(blogDto);
+
+    // Spinner Data çalışsın
+    this.setState({ spinnerData: true })
 
     // BlogApiServices.blogServiceCreate(blogDto).then().catch();
     try {
       const response = await BlogApiServices.blogServiceCreate(blogDto);
-      if (response == 200) {
+      if (response.status == 200) {
+        //this.setState({ spinnerData: false })
+        alert("deneme");
         // PHP
         this.props.history.push("/blog/list")
       }
     } catch (err) {
       console.log(err);
+
+      // backendten gelen hataları handle
+      if (err.response.data.validationErrors) {
+        //console.log(err.response.data.validationErrors);
+        this.setState({ validationErrors: err.response.data.validationErrors })
+      } //end if
+      this.setState({ spinnerData: false })
     }
   }
 
   // RENDER
   render() {
+
+    // i18n
+    const { t } = this.props;
+
+    // state
+    const { validationErrors, isRead, spinnerData } = this.state;
+    const { header, content } = validationErrors;
 
     // RETURN
     return (
@@ -86,42 +116,56 @@ this.setState({
             className="display-3 text-center text-primary p-4 text-uppercase"
             style={{ marginBottom: "1rem" }}
           >
-            Blog Create
+            {this.props.t('create')}
           </h2>
           <form className="create_form" method="post" autoComplete="true">
             {/* Header */}
-            <div className="form-outline mb-4">
+            {/* <div className="form-outline mb-4">
               <label className="form-label" htmlFor="header">
-                {this.props.t('blog_header')}
+                {t('blog_header')}
               </label>
               <input
                 type="text"
                 className="form-control"
                 id="header"
                 name="header"
-                placeholder={this.props.t('blog_header')}
+                placeholder={t('blog_header')}
                 autofocus={true}
                 required={true}
                 onChange={this.onchangeInputValue}
               />
-              <div className="text-danger is-invalid">{this.props.t('is_valid_header')}</div>
-            </div>
+              <div className="text-danger is-invalid">{t('is_valid_header')}</div>
+            </div> */}
+            <ResuabilityBlogInput
+              type="text"
+              name="header"
+              label={t('blog_header')}
+              id="header"
+              placeholder={t('blog_header')}
+              autoFocus={true}
+              required={true}
+              onChange={this.onchangeInputValue}
+              //error={this.state.validationErrors.header}
+              error={header}
+            />
+
             {/* Content */}
             <div className="form-outline mb-4">
               <label className="form-label" htmlFor="content">
-                {this.props.t('blog_content')}
+                {t('blog_content')}
               </label>
               <textarea
                 className="form-control"
                 id="content"
                 name="content"
-                placeholder={this.props.t('blog_content')}
-                autofocus={false}
+                placeholder={t('blog_content')}
+                autoFocus={false}
                 required={true}
-                defaultValue={"        "}
                 onChange={this.onchangeInputValue}
               />
-              <div className="text-danger is-invalid">{this.props.t('is_valid_content')}</div>
+              <div 
+              className={this.state.validationErrors.content&&'text-danger is-invalid'}
+               >{this.state.validationErrors.content}</div>
             </div>
             {/* is read */}
             <div className="form-check d-flex justify-content-center">
@@ -138,8 +182,12 @@ this.setState({
             </div>
             <button
               type='submit'
-              onClick={this.blogCreateSubmit}
-              className="btn btn-primary">{this.props.t('submit')}</button>
+              onClick={this.blogSubmit}
+              disabled={(!isRead)||(spinnerData)}
+              className="btn btn-primary">
+               {(spinnerData)&&<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}
+                {this.props.t('submit')}
+                </button>
           </form>
         </div>
       </React.Fragment>
@@ -150,12 +198,3 @@ this.setState({
 
 // i18n export default Wrapper
 export default withTranslation()(BlogCreate);
-
-// Kontrol
-// resuability
-// multiple request 
-// Update
-
-
-
-
