@@ -99,8 +99,8 @@ export default class BlogList extends Component {
                                         <td>{temp.id}</td>
                                         <td>{temp.header}</td>
                                         <td>{temp.content}</td>
-                                        <td><Link to={`/blog/update/${temp.id}`} > <i style={{ "cursor": "pointer" }} className="text-primary fa-solid fa-pen-to-square" ></i></Link> </td>
-                                        <td><Link to={`/blog/view/${temp.id}`} > <i style={{ "cursor": "pointer" }} className="text-warning fa-solid fa-expand" ></i></Link> </td>
+                                        <td><Link to={{pathname:`/blog/update/${temp.id}`} } > <i style={{ "cursor": "pointer" }} className="text-primary fa-solid fa-pen-to-square" ></i></Link> </td>
+                                        <td><Link to={{pathname:`/blog/view/${temp.id}`}} > <i style={{ "cursor": "pointer" }} className="text-warning fa-solid fa-expand" ></i></Link> </td>
                                         <td><i style={{ "cursor": "pointer" }} className="text-danger fa-solid fa-trash" onClick={() => {
                                             if (window.confirm("Blogu Silmek istediğinizden Emin misiniz?")) {
                                                 this.delete(temp.id);

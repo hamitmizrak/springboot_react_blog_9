@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import BlogApiServices from '../../services/BlogApiServices';
+import { useParams } from 'react-router-dom';
 
 export default class BlogView extends Component {
 
@@ -9,6 +10,7 @@ export default class BlogView extends Component {
   // CONSTRUCTOR
   constructor(props) {
     super(props);
+   
     // STATE
     this.state = {
       //id: this.props.match.params.id,
@@ -23,6 +25,8 @@ export default class BlogView extends Component {
       .then((response) => {
         const findBlog = response.data;
         //console.log(findBlog);
+        //alert(this.props.match.params.id );
+        
         this.setState({
           //1.YOL
           //header: findBlog.header,
