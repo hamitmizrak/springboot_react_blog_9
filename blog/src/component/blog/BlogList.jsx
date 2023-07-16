@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import BlogApiServices from '../../services/BlogApiServices';
+import { Link } from 'react-router-dom';
 
 export default class BlogList extends Component {
 
@@ -11,10 +12,10 @@ export default class BlogList extends Component {
             blogList: [],
         }
         //BIND
-        this.create=this.create.bind(this);
-        this.view=this.view.bind(this);
-        this.update=this.update.bind(this);
-        this.delete=this.delete.bind(this);
+        // this.create=this.create.bind(this);
+        // this.view=this.view.bind(this);
+        // this.update=this.update.bind(this);
+        this.delete = this.delete.bind(this);
     }
 
     // CDM
@@ -31,24 +32,25 @@ export default class BlogList extends Component {
             });
     }
 
-    // FUNCTION
-    // PUSH CREATE
-    create() {
-        // PHP
-        this.props.history.push("/blog/create")
-    }
+    // // FUNCTION
+    // // PUSH CREATE
+    // create() {
+    //     // PHP
+    //     this.props.history.push("/blog/create")
+    // }
 
-    // PUSH VIEW
-    view(id) {
-        // PHP
-        this.props.history.push("/blog/view/" + id)
-    }
+    // // PUSH VIEW
+    // view(id) {
+    //     // PHP
+    //    // this.props.history.push("/blog/view/" + id)
+    //    <Link to={"/blog/create"} className="btn btn-primary"> Ekle</Link>
+    // }
 
-    // PUSH UPDATE
-    update(id) {
-        // PHP
-        this.props.history.push(`/blog/update/${id}`)
-    }
+    // // PUSH UPDATE
+    // update(id) {
+    //     // PHP
+    //     this.props.history.push(`/blog/update/${id}`)
+    // }
 
     //DELETE
     delete(id) {
@@ -75,7 +77,7 @@ export default class BlogList extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="mx-auto">
-                            <button className="btn btn-primary" onClick={this.create}>Ekle</button>
+                            <Link to={"/blog/create"} className="btn btn-primary"> Ekle</Link>
                             {/* <button className="btn btn-primary" onClick={()=>this.create()}>Ekle</button> */}
                         </div>
                     </div>
@@ -97,8 +99,9 @@ export default class BlogList extends Component {
                                         <td>{temp.id}</td>
                                         <td>{temp.header}</td>
                                         <td>{temp.content}</td>
-                                        <td><i style={{ "cursor": "pointer" }} className="text-primary fa-solid fa-pen-to-square" onClick={() => this.update(temp.id)} ></i></td>
-                                        <td><i style={{ "cursor": "pointer" }} className="text-warning fa-solid fa-expand" onClick={() => { this.view(temp.id) }}></i></td>
+                                        <td><Link to={`/blog/update/${temp.id}`} > <i style={{ "cursor": "pointer" }} className="text-primary fa-solid fa-pen-to-square" ></i></Link> </td>
+                                        <td><Link to={`/blog/view/${temp.id}`} > <i style={{ "cursor": "pointer" }} className="text-warning fa-solid fa-expand" ></i></Link> </td>
+
                                         <td><i style={{ "cursor": "pointer" }} className="text-danger fa-solid fa-trash" onClick={() => {
                                             if (window.confirm("Blogu Silmek istediğinizden Emin misiniz?")) {
                                                 this.delete(temp.id);
