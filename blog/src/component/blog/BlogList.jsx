@@ -77,8 +77,8 @@ export default class BlogList extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="mx-auto">
-                            <Link to={"/blog/create"} className="btn btn-primary"> Ekle</Link>
                             {/* <button className="btn btn-primary" onClick={()=>this.create()}>Ekle</button> */}
+                            <Link to={"/blog/create"} className="btn btn-primary"> Ekle</Link>
                         </div>
                     </div>
                     <table className="table table-hover table-striped">
@@ -101,7 +101,6 @@ export default class BlogList extends Component {
                                         <td>{temp.content}</td>
                                         <td><Link to={`/blog/update/${temp.id}`} > <i style={{ "cursor": "pointer" }} className="text-primary fa-solid fa-pen-to-square" ></i></Link> </td>
                                         <td><Link to={`/blog/view/${temp.id}`} > <i style={{ "cursor": "pointer" }} className="text-warning fa-solid fa-expand" ></i></Link> </td>
-
                                         <td><i style={{ "cursor": "pointer" }} className="text-danger fa-solid fa-trash" onClick={() => {
                                             if (window.confirm("Blogu Silmek istediğinizden Emin misiniz?")) {
                                                 this.delete(temp.id);

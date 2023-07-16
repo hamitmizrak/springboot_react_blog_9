@@ -20,7 +20,7 @@ import BlogList from './component/blog/BlogList';
 import BlogCreate from './component/blog/BlogCreate';
 import BlogUpdate from './component/blog/BlogUpdate';
 import BlogView from './component/blog/BlogView';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 
 // CLASS
@@ -52,12 +52,35 @@ class RouterBlog extends Component {
             <React.Fragment>
                 <Header logo="" />
                 <div className="container">
+
+                    {/* 
+       import {BrowserRouter as Router, Route, Switch} from 'react-router-dom/cjs/react-router-dom.min';
+                <React.Fragment>
+                    <Router>
+                        <Header logo=""/>
+                        <div className="container">
+                            <Switch>
+                                <Route path="/" exact component={BlogList}></Route>
+                                <Route path="/blog" component={BlogList}></Route>
+                                <Route path="/blog/list" component={BlogList}></Route>
+                                <Route path="/blog/create" component={BlogCreate}></Route>
+                                <Route path="/blog/update/:id" component={BlogUpdate}></Route>
+                                <Route path="/blog/view/:id" component={BlogView}></Route>
+                                <Redirect to="/"/>
+                            </Switch>
+                        </div>
+                        <Footer copy="@Copy; Bütün Haklar Saklıdır"/>
+                    </Router>
+               </React.Fragment>
+                        */}
+
                     <Routes>
-                        <Route path="/" element={<BlogList />} />
+                        <Route path="/"  element={<BlogList />} />
                         <Route path="/blog/list" element={<BlogList />} />
                         <Route path="/blog/create" element={<BlogCreate />} />
                         <Route path="/blog/update/:id" element={<BlogUpdate />} />
                         <Route path="/blog/view/:id" element={<BlogView />} />
+                        <Route path="*" element={<Navigate to="/" />} />
                     </Routes>
                 </div>
                 <Footer copy="@Copy; Bütün Haklar Saklıdır" />

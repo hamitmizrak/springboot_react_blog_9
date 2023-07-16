@@ -11,3 +11,10 @@ npm install axios@1.4.0 --save
 npm install react-router-dom@5.2.0 --save
 npm install i18next@21.9.1 --save
 npm install react-i18next@11.18.6 --save
+
+-------------------------------------
+NORMAL                  JSX
+for                ==> 
+style              ==> style{{backgroundColor:red}}
+class              ==> className
+<a href="#/"/>     ==> <Link to="/"/>
