@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import BlogApiServices from '../../services/BlogApiServices';
 import ResuabilityBlogInput from './ResuabilityBlogInput';
 import { withTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 class BlogUpdate extends Component {
 
@@ -22,6 +23,9 @@ class BlogUpdate extends Component {
       spinnerData: false,
       validationErrors: {}
     };
+    //BIND
+     this.onchangeInputValue = this.onchangeInputValue.bind(this);
+     this.blogSubmit = this.blogSubmit.bind(this);
   }
 
   //CDM
@@ -88,6 +92,8 @@ class BlogUpdate extends Component {
     }
     console.log(blogDto);
 
+    
+
     // Spinner Data çalışsın
     this.setState({ spinnerData: true })
 
@@ -96,9 +102,12 @@ class BlogUpdate extends Component {
       .then((response) => {
         if (response.status == 200) {
           //this.setState({ spinnerData: false })
-          alert("deneme");
+          //alert("deneme");
           // PHP
           //this.props.history.push("/blog/list")
+          
+          let navigate=useNavigate();
+          navigate("/blog/list");
         }
       }).catch((err) => {
         console.log(err);

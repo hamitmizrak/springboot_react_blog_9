@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withTranslation } from 'react-i18next';
 import BlogApiServices from '../../services/BlogApiServices';
 import ResuabilityBlogInput from './ResuabilityBlogInput';
+import { useNavigate } from 'react-router-dom';
 
 class BlogCreate extends Component {
 
@@ -82,9 +83,12 @@ class BlogCreate extends Component {
       const response = await BlogApiServices.blogServiceCreate(blogDto);
       if (response.status == 200) {
         //this.setState({ spinnerData: false })
-        alert("deneme");
+        //alert("deneme");
         // PHP
-        this.props.history.push("/blog/list")
+        //this.props.history.push("/blog/list")
+         
+        let navigate=useNavigate();
+        navigate("/blog/list");
       }
     } catch (err) {
       console.log(err);
